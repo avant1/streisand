@@ -11,14 +11,14 @@
     state: directory
 
 - block:
-    - name: Mirror Tunnelblick for macOS
-      get_url:
-        url: "{{ tunnelblick_url }}"
-        dest: "{{ openvpn_mirror_location }}"
-        checksum: "{{ tunnelblick_checksum }}"
-        owner: www-data
-        group: www-data
-        mode: 0644
+#    - name: Mirror Tunnelblick for macOS
+#      get_url:
+#        url: "{{ tunnelblick_url }}"
+#        dest: "{{ openvpn_mirror_location }}"
+#        checksum: "{{ tunnelblick_checksum }}"
+#        owner: www-data
+#        group: www-data
+#        mode: 0644
 
     - include_role:
         name: download-and-verify

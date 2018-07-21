@@ -16,7 +16,7 @@ remote-cert-tls client
 # Allow multiple clients with the same common name to concurrently connect.
 # In the absence of this option, OpenVPN will disconnect a client instance
 # upon connection of a new client having the same common name.
-# duplicate-cn
+duplicate-cn
 
 keepalive 1800 3600
 tls-crypt ta.key # This file is secret
@@ -28,9 +28,18 @@ tls-cipher TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384
 
 auth {{ openvpn_auth_digest }}
 tls-version-min 1.2
-compress lz4
+# compress lzo
 user nobody
 group nogroup
 persist-key
 persist-tun
 verb 0
+
+sndbuf {{ openvpn_sndbuf }}
+rcvbuf {{ openvpn_rcvbuf }}
+
+# fragment option is not supported by iOS OpenVPN app (VPN connect fails)
+# without this option other options are not so useful
+# fragment 0
+# tun-mtu 1400
+# mssfix 1360

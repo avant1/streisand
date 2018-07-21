@@ -9,10 +9,17 @@ openvpn_port: "636"
 openvpn_port_udp: "8757"
 openvpn_port_sslh: "443"
 openvpn_key_size: "4096"
-openvpn_cipher: "AES-256-CBC"
+openvpn_cipher: "AES-128-GCM"
 openvpn_ncp_ciphers: "AES-256-GCM:AES-128-GCM"
 openvpn_auth_digest: "SHA256"
 openvpn_connect_timeout: 10 #seconds
+
+# Let OS to determine optimal buffer size
+# Use 0 when using TCP, or 393216 when using UDP
+openvpn_sndbuf: 0
+#openvpn_sndbuf: 393216
+openvpn_rcvbuf: 0
+#openvpn_rcvbuf: 393216
 
 # If stunnel is enabled generating OpenVPN stunnel profiles requires these
 # variables to be defined

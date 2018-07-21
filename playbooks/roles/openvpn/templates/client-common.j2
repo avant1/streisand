@@ -8,9 +8,22 @@ persist-tun
 remote-cert-tls server
 verify-x509-name {{ openvpn_server_common_name.stdout }} name
 tls-version-min 1.2
-compress lz4
+#disabling this as it may cause slowness
+#comp-lzo
+
+key-direction 1
 verb 3
 route {{ streisand_ipv4_address }} 255.255.255.255 net_gateway
+
+sndbuf {{ openvpn_sndbuf }}
+rcvbuf {{ openvpn_rcvbuf }}
+
+# fragment option is not supported by iOS OpenVPN app (VPN connect fails)
+# without this option other options are not so useful
+# fragment 0
+# tun-mtu 1400
+# mssfix 1360
+
 
 <ca>
 {{ openvpn_ca_contents.stdout }}
